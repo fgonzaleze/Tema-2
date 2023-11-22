@@ -9,21 +9,21 @@ from multiprocessing import *
 def leerNumeros(archivo, cola):
     with open(archivo, 'r') as arch:
         for linea in arch:
-            numero = int(linea.strip())
+            numero = int(linea)
             cola.put(numero)
-    # none para el final de lectura 
-    cola.put(None)
+
 
 def contarNumCola(cola):
     res = 0
-    numero = cola.get()
-    while numero is not None:
-        res += numero
+    while True:
         numero = cola.get()
-    print("El resultado es:", res)
+        res += numero
+        if numero is None:
+            break
+        print("El resultado es:", res)
 
 if __name__ == "__main__":
-    archivo = "numeros.txt"
+    archivo = "numerosEj3.txt"
 
     queue = Queue()
 
