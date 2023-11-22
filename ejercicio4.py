@@ -40,4 +40,4 @@ if __name__ == "__main__":
     procesoleer.join()
     procesosumar.join()
 
-    print("Todos los procesos han terminado.")
+    print("Todos los procesos han terminado.") 
