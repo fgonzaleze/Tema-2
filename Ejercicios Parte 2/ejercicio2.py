@@ -8,6 +8,8 @@
 # El ejercicio son dos tuberías p1 ==== p2 ===== p3 
 # El primer proceso creará las IP y a medida que las vaya creando las irá enviando al p2, el cual irá filtrando y a su vez las enviará al p3, que las mostrará si corresponde.
 
+from multiprocessing import Pipe, Process
+from multiprocessing.connection import PipeConnection
 import random
 
 # def proceso1():
@@ -16,17 +18,25 @@ import random
 #                                 for _ in range(4))))
 #         print (ip)
 
-def proceso1(conn):
-    for i in range(4):
-        ip = ""
-        ip = ip + str(random.randint(0, 255))
-        if (i!=3):
-            ip = ip + "."
-        print("Proceso 1 en marcha")
-        conn.send(ip)
-    conn.send(None)
+
+def generaIP(tuberia:PipeConnection):
+    for _ in range (10): # Barra baja si no usas la variable y solo quieres que el bucle se cumpla x veces
+        ip =""
+        for i in range(4):
+            octeto = random.randint(0,255)
+            ip += str(octeto)
+            if(i!=3):
+                ip = ip + "."
+        else:
+            tuberia.send(ip)
+        print(ip)
+
+def filtrar(tubleft:PipeConnection, tubright:PipeConnection):
+    #Slit por el punto y filtrarlo
 
 if __name__ == "__main__":
-    print()
- 
+    p1left, p1right = Pipe()
+    p2left, p2right = Pipe()
+    p1 = Process(target=generaIP, args=(p1left,))
+    p2 = Process(target=generaIP, args=(p1right, p2left))
     
