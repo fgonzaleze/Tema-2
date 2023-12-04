@@ -33,10 +33,37 @@ def generaIP(tuberia:PipeConnection):
 
 def filtrar(tubleft:PipeConnection, tubright:PipeConnection):
     #Slit por el punto y filtrarlo
+    ip = tubleft.recv()
+    while ip is not None:
+        octetos = ip.split(".")
+        octeto1 = int(octetos[0])
+        if octeto1 <= 223: # Para filtrar la ip
+            tubleft.send()
+        
+
+
+def imprimirClase(tubright:PipeConnection):
+    ip = tubright.recv()
+    while ip is not None:
+        octetos = ip.split(".")
+        octeto1 = int(octetos[0])
+        if octeto1 <= 127:
+            print(ip, "Clase A")
+        elif octeto1 <= 191:
+            print(ip, "Clase B")
+        elif octeto1 <= 223:
+            print(ip, "Clase C")
 
 if __name__ == "__main__":
     p1left, p1right = Pipe()
     p2left, p2right = Pipe()
     p1 = Process(target=generaIP, args=(p1left,))
     p2 = Process(target=generaIP, args=(p1right, p2left))
+    p3 = Process(target=imprimirClase, args=(p2right,))
+
+    # Lanzamos los proyectos a la vez 
+    p1.start()
+    p2.start()
+    p3.start()
+    print("Acabaron los procesos")
     
