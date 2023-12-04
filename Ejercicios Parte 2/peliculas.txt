@@ -1,0 +1,22 @@
+Donnie Darko;2001
+Moulin Rouge;2001
+El viaje de chihiro;2001
+Amelie;2001
+Pulp Fiction;1994
+Forrest Gump;1994
+The Shawshank Redemption;1994
+The Matrix;1999
+Fight Club;1999
+The Sixth Sense;1999
+Gladiator;2000
+Memento;2000
+Requiem for a Dream;2000
+A Beautiful Mind;2001
+The Lord of the Rings: The Fellowship of the Ring;2001
+The Lord of the Rings: The Two Towers;2002
+The Lord of the Rings: The Return of the King;2003
+The Dark Knight;2008
+Inception;2010
+Interstellar;2014
+Parasite;2019
+1917;2019
